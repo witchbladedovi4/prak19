@@ -23,8 +23,6 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
-            //descriptionToDo.Text = "Описания нет";
-            //dateToDo.SelectedDate = new DateTime(2024, 1, 10);
 
             Todo.Add(new ToDo("Приготовить покушать", new DateTime(2024, 1, 15), "Описания нет"));
             Todo.Add(new ToDo("Поработать", new DateTime(2024, 1, 20), "Сьездить на совещения в Москву"));
@@ -32,18 +30,18 @@ namespace WpfApp3
             listToDo.ItemsSource = Todo;
         }
 
-        //private void CheckBox_Cheked(object sender, RoutedEventArgs e)
-        //{
-        //    if (groupBoxToDo?.Visibility != null)
-        //    {
-        //        groupBoxToDo.Visibility = Visibility.Visible;
-        //    }
-        //}
+        private void CheckBox_Cheked(object sender, RoutedEventArgs e)
+        {
+            if (listToDo?.Visibility != null)
+            {
+                listToDo.Visibility = Visibility.Visible;
+            }
+        }
 
-        //private void CheckBox_Uncheked(object sender, RoutedEventArgs e)
-        //{
-        //    groupBoxToDo.Visibility = Visibility.Hidden;
-        //}
+        private void CheckBox_Uncheked(object sender, RoutedEventArgs e)
+        {
+            listToDo.Visibility = Visibility.Hidden;
+        }
 
         private void CreateToDo(object sender, RoutedEventArgs e)
         {

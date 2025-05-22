@@ -15,5 +15,8 @@ namespace WpfApp3
         public string Name { get { return name_; } }
         public DateTime Date { get { return date_; } }
         public string Description { get { return description_; } }
+        
+
+
     }
 }

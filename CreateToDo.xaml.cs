@@ -27,10 +27,28 @@ namespace WpfApp3
 
         private void SaveToDo(object sender, RoutedEventArgs e)
         {
-            var temp = dateToDo.SelectedDate.Value;
+
             var mainWindow = (MainWindow)Owner;
-            mainWindow.ToDoList.Add(new ToDo(titleToDo.Text, new DateTime(temp.Year, temp.Month, temp.Day), descriptionToDo.Text));
+            if (!dateToDo.SelectedDate.HasValue)
+            {
+                dateToDo.SelectedDate = DateTime.Now;
+            }
+            if (string.IsNullOrEmpty(titleToDo.Text)) 
+            {
+                titleToDo.Text = titleToDo.Text = "Надо навзвание";
+            }
+            if (string.IsNullOrEmpty(descriptionToDo.Text))
+            {
+                titleToDo.Text = descriptionToDo.Text = "Надо описание";
+            }
+
+            mainWindow.Todo.Add(new ToDo(titleToDo.Text,
+                                    new DateTime(dateToDo.SelectedDate.Value.Year,
+                                                dateToDo.SelectedDate.Value.Month,
+                                                dateToDo.SelectedDate.Value.Day),
+                                    descriptionToDo.Text));
             this.Close();
+
         }
 
     }
