@@ -6,7 +6,7 @@
         <Setter Property="FontFamily" Value="Cascadia Mono"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
-    
+
     <Style TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="BorderBrush" Value="#5ebec4"/>
