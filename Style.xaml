@@ -15,6 +15,27 @@
            TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="26"/>
         <Setter Property="Margin" Value="5 5 5 5"/>
-        <Setter Property=""
+        <Setter Property="Foreground" Value="#4ebec4"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono"/>
+    </Style>
+
+    <Style x:Key="RowStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="White"/>
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="#fffdfaf1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="DataGridStyle"
+           TargetType="{x:Type DataGrid}">
+        <Setter Property="Background" Value="#FDF5DF"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="HeadersVisibility" Value="None"/>
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="RowStyle" Value="{StaticResource RowStyle}" />
     </Style>
 </ResourceDictionary>

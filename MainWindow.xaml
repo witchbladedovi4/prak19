@@ -8,7 +8,7 @@
         Title="Список дел" Height="450" Width="400"
         ResizeMode="NoResize"
         >
-    
+
     <Grid Background="#fffdfaf1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -22,18 +22,13 @@
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Список дел" 
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
-                   FontSize="26"
-                   />
-        <DataGrid     
-            Background="#FDF5DF"   
-            Name="listToDo"
+                   Style="{StaticResource HeaderStyle}"/>
+        <DataGrid Name="listToDo"
             Margin="5 0 5 0"
             Grid.Row="1" 
             Grid.Column="0" 
             Grid.ColumnSpan="2"
-            AutoGenerateColumns="False"
-            HeadersVisibility="None">
-
+                  Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Width="0.1*"/>
                 <DataGridTextColumn Binding="{Binding Path=Name}"
@@ -46,9 +41,11 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="DeleteToDo" Click="DeleteToDo"
-                                    Background="#5ebec4">
-                                <Image Source="icon/delete.png" Height="10" Width="10"/>
+                            <Button Name="DeleteToDo" 
+                                    Click="DeleteToDo">
+                                <Image Source="icon/delete.png" 
+                                       Height="10" 
+                                       Width="10"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
