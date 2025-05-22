@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
         Title="Список дел" Height="450" Width="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        >
+    
     <Grid Background="#fffdfaf1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -71,7 +73,7 @@
                 Height="30"
                 Width="30"
                 Click="CreateToDo"
-                Background="#5ebec4">
+                >
             <Image Source="icon/add.png"/>
             <Button.ToolTip>
                 <ToolTip>

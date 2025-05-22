@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="#5ebec4"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="FontFamily" Value="Cascadia Mono"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    
+    <Style TargetType="TextBox">
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="BorderBrush" Value="#5ebec4"/>
+    </Style>
+</ResourceDictionary>
