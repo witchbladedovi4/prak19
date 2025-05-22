@@ -35,11 +35,10 @@
                              AcceptsTab="True"
                              Margin="0 5 0 5"
                              BorderBrush="#5EBEC4"
-                                  Height="163"
+                             Height="163"
                                   
                              VerticalScrollBarVisibility="Auto"
-                             HorizontalScrollBarVisibility ="Auto"
-/>
+                             HorizontalScrollBarVisibility ="Auto"/>
                     
                     
                 </StackPanel>
@@ -47,7 +46,7 @@
         </GroupBox>
         <Button Grid.Row="2" 
                 Background="#5ebec4" 
-                Content="Сохрагить дело" 
+                Content="Сохранить дело" 
                 MaxHeight="30" MaxWidth="100"
                 Click="SaveToDo"/>
 
