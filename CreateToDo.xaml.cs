@@ -39,7 +39,7 @@ namespace WpfApp3
             }
             if (string.IsNullOrEmpty(descriptionToDo.Text))
             {
-                titleToDo.Text = descriptionToDo.Text = "Надо описание";
+                descriptionToDo.Text = descriptionToDo.Text = "Надо описание";
             }
 
             mainWindow.Todo.Add(new ToDo(titleToDo.Text,

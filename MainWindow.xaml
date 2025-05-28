@@ -79,6 +79,8 @@
             </Button.ToolTip>
 
         </Button>
-
+        <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+            <ProgressBar Minimum=""/>
+        </StackPanel>
     </Grid>
 </Window>
