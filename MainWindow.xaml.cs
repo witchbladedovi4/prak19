@@ -18,7 +18,8 @@ namespace WpfApp3
     public partial class MainWindow : Window
     {
 
-        public ObservableCollection<ToDo> Todo = new ObservableCollection<ToDo>();
+        public ObservableCollection<ToDo> Todo = [];
+
 
         public MainWindow()
         {
@@ -28,10 +29,38 @@ namespace WpfApp3
             Todo.Add(new ToDo("Поработать", new DateTime(2024, 1, 20), "Сьездить на совещения в Москву"));
             Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
             listToDo.ItemsSource = Todo;
+
+            listToDo.SelectionChanged += (s, e) => UpdateProgress();
+            Todo.CollectionChanged += (s, e) => UpdateProgress();
         }
 
+
+        private void UpdateProgress()
+        {
+            if (Todo.Count == 0) return;
+
+            int doneCount = 0;
+            foreach(var todo in Todo)
+            {
+                if (todo.IsDone)
+                {
+                    doneCount++;
+                }
+            }
+            progressBar.Minimum = 0;
+            progressBar.Maximum = Todo.Count;
+            progressBar.Value = doneCount;
+
+            progressText.Text = $"{doneCount}/{Todo.Count}";
+        }
         private void CheckBox_Cheked(object sender, RoutedEventArgs e)
         {
+            var todo = (sender as CheckBox)?.DataContext as ToDo;
+            if (todo != null)
+            {
+                UpdateProgress();
+            }
+
             if (listToDo?.Visibility != null)
             {
                 listToDo.Visibility = Visibility.Visible;
@@ -40,6 +69,9 @@ namespace WpfApp3
 
         private void CheckBox_Uncheked(object sender, RoutedEventArgs e)
         {
+            var todo = (sender as CheckBox)?.DataContext as ToDo;
+            UpdateProgress();
+
             listToDo.Visibility = Visibility.Hidden;
         }
 

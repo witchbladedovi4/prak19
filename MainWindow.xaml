@@ -30,8 +30,11 @@
             Grid.ColumnSpan="2"
                   Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="0.1*"/>
-                <DataGridTextColumn Binding="{Binding Path=Name}"
+                <DataGridCheckBoxColumn Width="0.1*"
+                                        Binding="{Binding IsDone, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <DataGridTextColumn Binding="{Binding Path=Name}"
                                     Width="*"
                                     IsReadOnly="True"  
                                     />
@@ -79,8 +82,19 @@
             </Button.ToolTip>
 
         </Button>
-        <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
-            <ProgressBar Minimum=""/>
-        </StackPanel>
+
+
+
+            <ProgressBar Name="progressBar"
+                         Height="20"
+                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <TextBlock Name="progressText"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+
+
+
+
     </Grid>
 </Window>
