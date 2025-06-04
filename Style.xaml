@@ -10,6 +10,9 @@
     <Style TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="BorderBrush" Value="#5ebec4"/>
+        <Style.Triggers>
+            
+        </Style.Triggers>
     </Style>
     <Style x:Key="HeaderStyle"
            TargetType="{x:Type TextBlock}">
@@ -40,5 +43,5 @@
     <Style TargetType="{x:Type DatePicker}">
         <Setter Property="Background" Value="White"/>
     </Style>
-    
+
 </ResourceDictionary>
