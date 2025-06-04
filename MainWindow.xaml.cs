@@ -30,12 +30,12 @@ namespace WpfApp3
             Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
             listToDo.ItemsSource = Todo;
 
-            listToDo.SelectionChanged += (s, e) => UpdateProgress();
-            Todo.CollectionChanged += (s, e) => UpdateProgress();
+            listToDo.SelectionChanged += (s, e) => EndTodo();
+            Todo.CollectionChanged += (s, e) => EndTodo();
         }
 
 
-        private void UpdateProgress()
+        private void EndTodo()
         {
             if (Todo.Count == 0) return;
 
@@ -58,7 +58,7 @@ namespace WpfApp3
             var todo = (sender as CheckBox)?.DataContext as ToDo;
             if (todo != null)
             {
-                UpdateProgress();
+                EndTodo();
             }
 
             if (listToDo?.Visibility != null)
@@ -70,7 +70,7 @@ namespace WpfApp3
         private void CheckBox_Uncheked(object sender, RoutedEventArgs e)
         {
             var todo = (sender as CheckBox)?.DataContext as ToDo;
-            UpdateProgress();
+            EndTodo();
 
             listToDo.Visibility = Visibility.Hidden;
         }

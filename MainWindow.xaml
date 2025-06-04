@@ -30,11 +30,16 @@
             Grid.ColumnSpan="2"
                   Style="{StaticResource DataGridStyle}">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Width="0.1*"
-                                        Binding="{Binding IsDone, 
-                    UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <DataGridTextColumn Binding="{Binding Path=Name}"
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsDone, Mode=TwoWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                                      Click="CheckBox_Cheked"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Path=Name}"
                                     Width="*"
                                     IsReadOnly="True"  
                                     />
