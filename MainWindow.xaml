@@ -24,7 +24,7 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Style="{StaticResource HeaderStyle}"/>
-        <DataGrid Name="listToDo"
+        <ListBox Name="listToDo"
             Margin="5 0 5 0"
             Grid.Row="1" 
             Grid.Column="0" 
@@ -66,13 +66,13 @@
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
                                   HorizontalScrollBarVisibility="Auto"
                                   MaxHeight="150">
-                        
+
                         <TextBlock Text="{Binding Path=Description}"
                                    TextWrapping="Wrap" Margin="5"/>
                     </ScrollViewer>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
-        </DataGrid>
+        </ListBox>
         <Button Grid.Column="1" Grid.Row="0" 
                 VerticalAlignment="Center"
                 HorizontalAlignment="Right"

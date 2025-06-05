@@ -5,13 +5,21 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="FontFamily" Value="Cascadia Mono"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderThickness" Value="3"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="TextBox">
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="BorderBrush" Value="#5ebec4"/>
         <Style.Triggers>
-            
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="#fffffad6"/>
+                <Setter Property="BorderThickness" Value="2"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
     <Style x:Key="HeaderStyle"
