@@ -46,7 +46,7 @@
                              AcceptsTab="True"
                              Margin="0 5 0 5"
                              BorderBrush="#5EBEC4"
-                             Height="163"
+                             Height="140"
                                   
                              VerticalScrollBarVisibility="Auto"
                              HorizontalScrollBarVisibility ="Auto"/>

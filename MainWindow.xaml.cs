@@ -29,7 +29,7 @@ namespace WpfApp3
             Todo.Add(new ToDo("Поработать", new DateTime(2024, 1, 20), "Сьездить на совещения в Москву"));
             Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
             listToDo.ItemsSource = Todo;
-
+            EndTodo();
             listToDo.SelectionChanged += (s, e) => EndTodo();
             Todo.CollectionChanged += (s, e) => EndTodo();
         }
@@ -38,7 +38,7 @@ namespace WpfApp3
         private void EndTodo()
         {
             if (Todo.Count == 0) return;
-
+            
             int doneCount = 0;
             foreach(var todo in Todo)
             {
@@ -47,10 +47,10 @@ namespace WpfApp3
                     doneCount++;
                 }
             }
+
             progressBar.Minimum = 0;
             progressBar.Maximum = Todo.Count;
             progressBar.Value = doneCount;
-
             progressText.Text = $"{doneCount}/{Todo.Count}";
         }
         private void CheckBox_Cheked(object sender, RoutedEventArgs e)
