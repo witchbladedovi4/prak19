@@ -25,9 +25,10 @@ namespace WpfApp3
         {
             InitializeComponent();
 
-            Todo.Add(new ToDo("Приготовить покушать", new DateTime(2024, 1, 15), "Описания нет"));
-            Todo.Add(new ToDo("Поработать", new DateTime(2024, 1, 20), "Сьездить на совещения в Москву"));
+            Todo.Add(new ToDo("Приготовить покушать", DateTime.Today, "Описания нет"));
+            Todo.Add(new ToDo("Поработать", DateTime.Today.AddDays(1), "Сьездить на совещения в Москву"));
             Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
+            Todo.Add(new ToDo("Гулять", new DateTime(2026, 1, 1), "ы"));
             listToDo.ItemsSource = Todo;
             EndTodo();
             listToDo.SelectionChanged += (s, e) => EndTodo();
