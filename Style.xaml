@@ -36,7 +36,14 @@
         <Setter Property="FontFamily" Value="Cascadia Mono"/>
         
     </Style>
-    <Style x:Key="Dectext" TargetType="TextBlock">
+    <Style x:Key="DateColor" TargetType="TextBlock">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=Date, Converter={StaticResource LessDay}}" Value="True">
+                <Setter Property="Foreground" Value="Red"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+        <Style x:Key="Dectext" TargetType="TextBlock">
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsChecked, ElementName=myCheckBox}" Value="True">
                 <Setter Property="TextDecorations" Value="Strikethrough"/>
@@ -58,6 +65,8 @@
         <Setter Property="AlternatingRowBackground" Value="#fffdfaf1"/>
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
     </Style>
+
+
     <Style x:Key="CalendarStyle"
            TargetType="{x:Type Calendar}">
         <Setter Property="BorderThickness" Value="1.5"/>

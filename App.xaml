@@ -2,13 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfApp3"
+             xmlns:date="clr-namespace:WpfApp3.Converts"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <date:DateLessDay x:Key="LessDay"/>
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary Source="Style.xaml">
-                    <local:DateConvert x:Key="DateConvert"/>
+                    
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
