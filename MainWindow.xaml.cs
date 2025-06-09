@@ -38,7 +38,15 @@ namespace WpfApp3
 
         private void EndTodo()
         {
-            if (Todo.Count == 0) return;
+            if (Todo.Count == 0)
+            {
+                progressBar.Minimum = 0;
+                progressBar.Maximum = 1;
+                progressBar.Value = 0;
+                progressText.Text = "0/0";
+                return;
+            }
+           
             
             int doneCount = 0;
             foreach(var todo in Todo)
@@ -85,11 +93,14 @@ namespace WpfApp3
 
         private void DeleteToDo(object sender, RoutedEventArgs e)
         {
-            if (listToDo.SelectedItem as ToDo == null) { return; }
-            else
-            {
-                Todo.Remove(listToDo.SelectedItem as ToDo);
-            }
+            var button = sender as Button;
+            if (button == null) return;
+
+            var todoToDelete = button.DataContext as ToDo;
+            if (todoToDelete == null) return;
+
+            Todo.Remove(todoToDelete);
+            EndTodo();
         }
 
     }

@@ -8,14 +8,14 @@ using System.Windows.Data;
 
 namespace WpfApp3.Converts
 {
-    public class DateLessDay : IValueConverter
+    public class DateTodayDay : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var d = value as DateTime?;
             if (d != null)
             {
-                return DateTime.Today > d.Value;
+                return DateTime.Today == d.Value;
             }
             return false;
 
