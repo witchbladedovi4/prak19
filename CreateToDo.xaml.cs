@@ -26,41 +26,43 @@ namespace WpfApp3
         }
 
 
-        private void Exit_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void Exit_Executed(object sender, ExecutedRoutedEventArgs? e)
         {
             if (string.IsNullOrEmpty(titleToDo.Text))
+            {
                 titleToDo.Text = "Название обязательно";
+                titleToDo.Focus(); // Фокус на поле с ошибкой
+                return;
+            }
 
-            if (!dateToDo.SelectedDate.HasValue)
-                dateToDo.SelectedDate = DateTime.Now;
-
-  
             var mainWindow = (MainWindow)Owner;
             mainWindow.Todo.Add(new ToDo(
                 titleToDo.Text,
-                dateToDo.SelectedDate.Value,
+                dateToDo.SelectedDate ?? DateTime.Now,
                 descriptionToDo.Text ?? "Нет описания"
             ));
-
 
             this.Close();
         }
 
         private void Exit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !string.IsNullOrWhiteSpace(titleToDo.Text)
-                && dateToDo.SelectedDate.HasValue;
+            if (string.IsNullOrEmpty(titleToDo.Text))
+            {
+                titleToDo.Text = "Название обязательно";
+                titleToDo.Focus(); 
+                return;
+            }
         }
 
-        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             
-            if (e.OriginalSource is not TextBox)
+            if (e.Key == Key.Enter)
             {
-
-                Keyboard.ClearFocus();
-
-
+                
+                Exit_Executed(sender, null);
+                e.Handled = true; 
             }
         }
     }

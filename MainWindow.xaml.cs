@@ -28,20 +28,26 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
-            if (Todo.Count == 0 )
-            {
-                Todo.Add(new ToDo("Приготовить покушать", DateTime.Today, "Описания нет"));
-                Todo.Add(new ToDo("Поработать", DateTime.Today.AddDays(1), "Сьездить на совещения в Москву"));
-                Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
-                Todo.Add(new ToDo("Гулять", new DateTime(2026, 1, 1), "ы"));
-            }
-           
+            Loaded += MainWindow_Loaded;
             listToDo.ItemsSource = Todo;
             EndTodo();
             listToDo.SelectionChanged += (s, e) => EndTodo();
             Todo.CollectionChanged += (s, e) => EndTodo();
         }
-       
+       private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var loadedTodoS = JsonFileService.LoadFromFile();
+            Todo.Clear();
+            foreach (var todo in loadedTodoS)
+            {
+                Todo.Add(todo);
+            }
+
+            Todo.CollectionChanged += (s, args) =>
+            {
+                JsonFileService.SaveToFile(Todo);
+            };
+        }
         private void EndTodo()
         {
             if (Todo.Count == 0)

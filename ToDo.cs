@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,27 +8,31 @@ using System.Threading.Tasks;
 
 namespace WpfApp3
 {
-    public class ToDo(string name, DateTime date, string description)
+    [JsonObject]
+    public class ToDo
     {
-        private string name_ = name;
-        private DateTime date_ = date;
-        private string description_ = description;
-        private bool isDone_ = false;
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
+        [JsonProperty("date")]
+        public DateTime Date { get; set; }
 
+        [JsonProperty("description")]
+        public string Description { get; set; }
 
+        [JsonProperty("isDone")]
+        public bool IsDone { get; set; }
 
-        public string Name { get { return name_; } }
-        public DateTime Date { get { return date_; } }
-        public string Description { get { return description_; } }
-        
-        public bool IsDone
+        public ToDo(string name, DateTime date, string description)
         {
-            get => isDone_;
-            set => isDone_ = value;
+            Name = name;
+            Date = date;
+            Description = description;
+            IsDone = false;
         }
 
-
-
+        // Пустой конструктор для десериализации
+        [JsonConstructor]
+        public ToDo() { }
     }
 }

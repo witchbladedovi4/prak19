@@ -8,13 +8,7 @@
         ResizeMode="NoResize"
         Title="CreateToDo" Height="450" Width="400"
         Focusable="True"
-        PreviewMouseDown="Window_PreviewMouseDown">
-    <Window.CommandBindings>
-        <CommandBinding
-            Command="{x:Static local:CustomCommands.Exit}"
-            Executed="Exit_Executed"
-            CanExecute="Exit_CanExecute"/>
-    </Window.CommandBindings>
+        PreviewKeyDown="Window_PreviewKeyDown">
 
     <Window.InputBindings>
         <KeyBinding
