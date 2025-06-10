@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 
@@ -27,18 +28,20 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
-
-            Todo.Add(new ToDo("Приготовить покушать", DateTime.Today, "Описания нет"));
-            Todo.Add(new ToDo("Поработать", DateTime.Today.AddDays(1), "Сьездить на совещения в Москву"));
-            Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
-            Todo.Add(new ToDo("Гулять", new DateTime(2026, 1, 1), "ы"));
+            if (Todo.Count == 0 )
+            {
+                Todo.Add(new ToDo("Приготовить покушать", DateTime.Today, "Описания нет"));
+                Todo.Add(new ToDo("Поработать", DateTime.Today.AddDays(1), "Сьездить на совещения в Москву"));
+                Todo.Add(new ToDo("Отдохнуть", new DateTime(2024, 1, 1), "Сьездить в отпуску в Сочи"));
+                Todo.Add(new ToDo("Гулять", new DateTime(2026, 1, 1), "ы"));
+            }
+           
             listToDo.ItemsSource = Todo;
             EndTodo();
             listToDo.SelectionChanged += (s, e) => EndTodo();
             Todo.CollectionChanged += (s, e) => EndTodo();
         }
-
-
+       
         private void EndTodo()
         {
             if (Todo.Count == 0)
@@ -96,19 +99,56 @@ namespace WpfApp3
 
         private void DeleteToDo(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button == null) return;
+            var resulr =MessageBox.Show("Вы уверены, что хотите удалить дело", "Удаление дела", 
+                MessageBoxButton.YesNo);
+            if (resulr == MessageBoxResult.Yes)
+            {
+                var button = sender as Button;
+                if (button == null) return;
 
-            var todoToDelete = button.DataContext as ToDo;
-            if (todoToDelete == null) return;
+                var todoToDelete = button.DataContext as ToDo;
+                if (todoToDelete == null) return;
 
-            Todo.Remove(todoToDelete);
-            EndTodo();
+                Todo.Remove(todoToDelete);
+                EndTodo();
+            }
+            else return;
         }
-
         private void SaveTodo(object sender, RoutedEventArgs e)
         {
-            
+            if (Todo.Count == 0)
+            {
+                MessageBox.Show($"В списке нет дел", "", MessageBoxButton.OK);
+                return;
+            }
+            var saveFile = new SaveFileDialog
+            {
+                Filter = "JSON файл (*.json)|*.json|" +
+                "Текстовый файл (*.txt)|.txt",
+                DefaultExt = ".txt",
+                Title = "Сохранить список задач",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            };
+            if (saveFile.ShowDialog() == true)
+            {
+                string filePath = saveFile.FileName;
+                try
+                {
+                    string json = JsonConvert.SerializeObject(Todo, Formatting.Indented);
+                    File.WriteAllText(filePath, json);
+
+                    MessageBox.Show($"Задачи сохранены в файл:\n{filePath}", "Успех",
+                          MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
+
     }
 }
+
