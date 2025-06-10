@@ -25,31 +25,43 @@ namespace WpfApp3
             dateToDo.SelectedDate = DateTime.Now;
         }
 
-        private void SaveToDo(object sender, RoutedEventArgs e)
+
+        private void Exit_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(titleToDo.Text))
+                titleToDo.Text = "Название обязательно";
 
-            var mainWindow = (MainWindow)Owner;
             if (!dateToDo.SelectedDate.HasValue)
-            {
                 dateToDo.SelectedDate = DateTime.Now;
-            }
-            if (string.IsNullOrEmpty(titleToDo.Text)) 
-            {
-                titleToDo.Text = titleToDo.Text = "Надо навзвание";
-            }
-            if (string.IsNullOrEmpty(descriptionToDo.Text))
-            {
-                descriptionToDo.Text = descriptionToDo.Text = "Надо описание";
-            }
 
-            mainWindow.Todo.Add(new ToDo(titleToDo.Text,
-                                    new DateTime(dateToDo.SelectedDate.Value.Year,
-                                                dateToDo.SelectedDate.Value.Month,
-                                                dateToDo.SelectedDate.Value.Day),
-                                    descriptionToDo.Text));
+  
+            var mainWindow = (MainWindow)Owner;
+            mainWindow.Todo.Add(new ToDo(
+                titleToDo.Text,
+                dateToDo.SelectedDate.Value,
+                descriptionToDo.Text ?? "Нет описания"
+            ));
+
+
             this.Close();
-
         }
 
+        private void Exit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !string.IsNullOrWhiteSpace(titleToDo.Text)
+                && dateToDo.SelectedDate.HasValue;
+        }
+
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+            if (e.OriginalSource is not TextBox)
+            {
+
+                Keyboard.ClearFocus();
+
+
+            }
+        }
     }
 }

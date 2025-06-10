@@ -90,12 +90,6 @@ namespace WpfApp3
             listToDo.Visibility = Visibility.Hidden;
         }
 
-        private void CreateToDo(object sender, RoutedEventArgs e)
-        {
-            var newwin = new CreateToDo();
-            newwin.Owner = this;
-            newwin.Show();
-        }
 
         private void DeleteToDo(object sender, RoutedEventArgs e)
         {
@@ -114,7 +108,24 @@ namespace WpfApp3
             }
             else return;
         }
-        private void SaveTodo(object sender, RoutedEventArgs e)
+        
+
+        private void AddNewTask_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var newWindow = new CreateToDo
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            newWindow.ShowDialog();
+        }
+
+        private void AddNewTask_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SaveTask_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Todo.Count == 0)
             {
@@ -125,30 +136,85 @@ namespace WpfApp3
             {
                 Filter = "JSON файл (*.json)|*.json|" +
                 "Текстовый файл (*.txt)|.txt",
-                DefaultExt = ".txt",
+                DefaultExt = ".json",
                 Title = "Сохранить список задач",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
             };
+
             if (saveFile.ShowDialog() == true)
             {
                 string filePath = saveFile.FileName;
                 try
                 {
-                    string json = JsonConvert.SerializeObject(Todo, Formatting.Indented);
-                    File.WriteAllText(filePath, json);
+                    if (filePath.EndsWith(".json"))
+                    {
+                        string json = JsonConvert.SerializeObject(Todo, Formatting.Indented);
+                        File.WriteAllText(filePath, json);
+                    }
+                    else if (filePath.EndsWith(".txt"))
+                    {
 
-                    MessageBox.Show($"Задачи сохранены в файл:\n{filePath}", "Успех",
-                          MessageBoxButton.OK, MessageBoxImage.Information);
+                        using (StreamWriter writer = new StreamWriter(saveFile.FileName))
+                        {
+                            foreach (var item in Todo)
+                            {
+                                if (item.IsDone == true)
+                                {
+                                    writer.WriteLine($"✔{item.Name}");
+                                }
+                                else
+                                {
+                                    writer.WriteLine(item.Name);
+                                }
+                                writer.WriteLine($"\n{item.Date}");
+                                writer.WriteLine($"\n{item.Description}\n\n");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неизвестный формат файла", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    MessageBox.Show($"Задачи сохранены в файл:\n{filePath}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+        
+        
 
+        private void SaveTask_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
 
+        private void DeleteTask_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (listToDo.SelectedItem is ToDo selectedTask)
+            {
+                var resulr = MessageBox.Show("Вы уверены, что хотите удалить дело", "Удаление дела",
+                MessageBoxButton.YesNo);
+                if (resulr == MessageBoxResult.Yes)
+                {
+                    Todo.Remove(selectedTask);
+                    EndTodo();
+                }
+                else return;
+
+            }
+
+            
+        }
+
+        private void DeleteTask_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = listToDo.SelectedItem != null;
+        }
     }
 }
 

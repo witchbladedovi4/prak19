@@ -9,7 +9,30 @@
         Icon="icon/icon.png"
         ResizeMode="NoResize">
 
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{x:Static local:CustomCommands.AddNewTask}" 
+            Executed="AddNewTask_Executed"
+            CanExecute="AddNewTask_CanExecute"/>
+        
+        <CommandBinding
+            Command="{x:Static local:CustomCommands.SaveTask}"
+            Executed="SaveTask_Executed"
+            CanExecute="SaveTask_CanExecute"/>
+    </Window.CommandBindings>
 
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{x:Static local:CustomCommands.AddNewTask}" 
+            Key="N" 
+            Modifiers="Control"/>
+        
+        <KeyBinding
+            Command="{x:Static local:CustomCommands.SaveTask}"
+            Key="S"
+            Modifiers="Ctrl"/>
+    </Window.InputBindings>
+    
     <Grid Background="#fffdfaf1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
@@ -29,7 +52,19 @@
          Grid.Row="1" 
          Grid.ColumnSpan="2"
          HorizontalAlignment="Stretch"
-         HorizontalContentAlignment="Stretch">
+         HorizontalContentAlignment="Stretch"
+                 ItemsSource="{Binding Todo}">
+            <ListBox.CommandBindings>
+                <CommandBinding 
+                    Command="{x:Static local:CustomCommands.DeleteTask}"
+                    Executed="DeleteTask_Executed"
+                    CanExecute="DeleteTask_CanExecute"/>
+            </ListBox.CommandBindings>
+            <ListBox.InputBindings>
+                <KeyBinding 
+                    Command="{x:Static local:CustomCommands.DeleteTask}"
+                    Key="Delete"/>
+            </ListBox.InputBindings>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,5" Height="50">
@@ -66,7 +101,7 @@
                                 <Button Name="DeleteToDo" 
                                 Click="DeleteToDo">
 
-                                    <Image Source="icon/delete.png" Height="10" Width="10"/>
+                                    <Image Source="icon/delete.png" MaxHeight="10" MaxWidth="10"/>
                                 </Button>
                             </StackPanel>
                         </Grid>
@@ -85,23 +120,22 @@
         HorizontalAlignment="Right">
             <Button Width="30"
                     Height="30"
-                    Click="SaveTodo">
+                    Command="{x:Static local:CustomCommands.SaveTask}">
                 <Image Source="/icon/save.png"/>
             </Button>
-            <Button
-        Height="30"
-        Width="30"
-        Margin="0 0 5 0"
-        Click="CreateToDo"
-        >
-                <Image Source="icon/add.png"/>
-                <Button.ToolTip>
+            
+            <Button MaxWidth="30" MaxHeight="30" 
+            Command="{x:Static local:CustomCommands.AddNewTask}">
+            <StackPanel Orientation="Horizontal">
+                    <Image Source="icon/add.png" Width="16"/>
+                </StackPanel>
+            <Button.ToolTip>
                     <ToolTip>
-                        <TextBlock Text="При добавлении дела появится в списке слева, и его придется выполнить"/>
+                        <TextBlock Text="При добавлении дела появится в списке слева, 
+                                   и его придется выполнить"/>
                     </ToolTip>
                 </Button.ToolTip>
-
-            </Button>
+        </Button>
             
         </WrapPanel>
         

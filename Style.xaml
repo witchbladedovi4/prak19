@@ -37,7 +37,7 @@
         <Setter Property="Foreground" Value="#4ebec4"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="Cascadia Mono"/>
-        
+
     </Style>
     <Style x:Key="DateColor" TargetType="TextBlock">
         <Style.Triggers>
@@ -57,14 +57,14 @@
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsChecked, ElementName=myCheckBox}" Value="True">
                 <Setter Property="TextDecorations" Value="Strikethrough"/>
-                
+
             </DataTrigger>
         </Style.Triggers>
     </Style>
     <Style TargetType="ProgressBar">
         <Setter Property="Margin" Value="1"/>
     </Style>
-    
+
     <Style x:Key="DataGridStyle"
            TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="#FDF5DF"/>
@@ -100,4 +100,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

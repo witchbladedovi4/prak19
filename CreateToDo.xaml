@@ -6,8 +6,24 @@
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="CreateToDo" Height="450" Width="400">
-    <Grid Background="#fffdfaf1">
+        Title="CreateToDo" Height="450" Width="400"
+        Focusable="True"
+        PreviewMouseDown="Window_PreviewMouseDown">
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="{x:Static local:CustomCommands.Exit}"
+            Executed="Exit_Executed"
+            CanExecute="Exit_CanExecute"/>
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Command="{x:Static local:CustomCommands.Exit}"
+            Key="Return"/>
+    </Window.InputBindings>
+    
+    <Grid Background="#fffdfaf1"
+          >
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="*"/>
@@ -56,6 +72,6 @@
         <Button Grid.Row="2"  
                 Content="Сохранить дело" 
                 MaxHeight="30" MaxWidth="110"
-                Click="SaveToDo"/>
+                Command="{x:Static local:CustomCommands.Exit}"/>
     </Grid>
 </Window>
