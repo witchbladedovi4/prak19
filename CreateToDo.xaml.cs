@@ -45,12 +45,7 @@ namespace WpfApp3
 
         private void Exit_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(titleToDo.Text))
-            {
-                titleToDo.Text = "Без названия";
-                titleToDo.Focus(); 
-                return;
-            }
+            e.CanExecute = !string.IsNullOrEmpty(titleToDo.Text);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

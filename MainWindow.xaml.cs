@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using WpfApp3.Models;
 
 
 namespace WpfApp3
@@ -172,7 +173,7 @@ namespace WpfApp3
                                 {
                                     writer.WriteLine(item.Name);
                                 }
-                                writer.WriteLine($"\n{item.Date}");
+                                writer.WriteLine($"\n{item.Date.ToString("dd.MM.yyyy")}");
                                 writer.WriteLine($"\n{item.Description}\n\n");
                             }
                         }
