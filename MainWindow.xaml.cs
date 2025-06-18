@@ -142,7 +142,7 @@ namespace WpfApp3
             {
                 Filter = "JSON файл (*.json)|*.json|" +
                 "Текстовый файл (*.txt)|.txt",
-                DefaultExt = ".json",
+                DefaultExt = ".txt",
                 Title = "Сохранить список задач",
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
             };

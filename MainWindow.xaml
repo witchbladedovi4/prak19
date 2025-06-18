@@ -67,7 +67,7 @@
             </ListBox.InputBindings>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,5" Height="50">
+                    <Grid Margin="0,5" Height="70">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -105,10 +105,15 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <ScrollViewer
+                            Grid.Row="1"
+                            MaxHeight="60"
+                            VerticalScrollBarVisibility="Auto">
                         <TextBlock Text="{Binding Description}" 
                            Grid.Row="1" 
                            Grid.ColumnSpan="2"
                            TextWrapping="Wrap"/>
+                        </ScrollViewer>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

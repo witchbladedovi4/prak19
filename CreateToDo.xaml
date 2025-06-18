@@ -64,8 +64,9 @@
             </StackPanel>
         </GroupBox>
         <Button Grid.Row="2"  
-                Content="Сохранить дело" 
-                MaxHeight="30" MaxWidth="110"
-                Command="{x:Static local:CustomCommands.Exit}"/>
+        Content="Сохранить дело" 
+        Height="30" Width="110"
+        Click="Button_Click"
+        />
     </Grid>
 </Window>
