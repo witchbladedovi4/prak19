@@ -67,7 +67,7 @@
             </ListBox.InputBindings>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,5" Height="70">
+                    <Grid Margin="0,5" Height="Auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
