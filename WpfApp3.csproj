@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\icon\add.png" />
+    <None Remove="Assets\icon\delete.png" />
+    <None Remove="Assets\icon\icon.png" />
+    <None Remove="Assets\icon\save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\icon\add.png" />
+    <Resource Include="Assets\icon\delete.png" />
+    <Resource Include="Assets\icon\icon.png" />
+    <Resource Include="Assets\icon\save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViesModels\Interface\" />
+  </ItemGroup>
+
+</Project>

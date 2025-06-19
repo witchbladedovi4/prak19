@@ -1,0 +1,162 @@
+﻿<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="Список дел" Height="450" Width="400"
+        Icon="/Assets/icon/icon.png"
+        ResizeMode="NoResize">
+
+    <Window.CommandBindings>
+        <CommandBinding 
+            Command="{x:Static local:CustomCommands.AddNewTask}" 
+            Executed="AddNewTask_Executed"
+            CanExecute="AddNewTask_CanExecute"/>
+        
+        <CommandBinding
+            Command="{x:Static local:CustomCommands.SaveTask}"
+            Executed="SaveTask_Executed"
+            CanExecute="SaveTask_CanExecute"/>
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{x:Static local:CustomCommands.AddNewTask}" 
+            Key="N" 
+            Modifiers="Control"/>
+        
+        <KeyBinding
+            Command="{x:Static local:CustomCommands.SaveTask}"
+            Key="S"
+            Modifiers="Ctrl"/>
+    </Window.InputBindings>
+    
+    <Grid Background="#fffdfaf1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Список дел" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Style="{StaticResource HeaderStyle}"/>
+        <ListBox Name="listToDo"
+         Margin="5 0 5 0"
+         Grid.Row="1" 
+         Grid.ColumnSpan="2"
+         HorizontalAlignment="Stretch"
+         HorizontalContentAlignment="Stretch"
+                 ItemsSource="{Binding Todo}">
+            <ListBox.CommandBindings>
+                <CommandBinding 
+                    Command="{x:Static local:CustomCommands.DeleteTask}"
+                    Executed="DeleteTask_Executed"
+                    CanExecute="DeleteTask_CanExecute"/>
+            </ListBox.CommandBindings>
+            <ListBox.InputBindings>
+                <KeyBinding 
+                    Command="{x:Static local:CustomCommands.DeleteTask}"
+                    Key="Delete"/>
+            </ListBox.InputBindings>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,5" Height="70">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" 
+                                    VerticalAlignment="Center">
+                            <CheckBox IsChecked="{Binding IsDone, 
+                                Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}" 
+                                Click="CheckBox_Cheked"
+                                      Checked="CheckBox_Cheked"
+                                      Unchecked="CheckBox_Uncheked"
+                                      x:Name="myCheckBox"/>
+                            <TextBlock Text="{Binding Name}" 
+                               Margin="5 0 0 0"
+                                        Style="{StaticResource Dectext}"/>
+                        </StackPanel>
+
+                        <Grid Grid.Column="1" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Date, 
+                                    StringFormat='dd.MM.yyyy'}" 
+                                    Margin="5,0,5,0"
+                                           Style="{StaticResource DateColor}"/>
+                                <Button Name="DeleteToDo" 
+                                Click="DeleteToDo">
+
+                                    <Image Source="/Assets/icon/delete.png" MaxHeight="10" MaxWidth="10"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <ScrollViewer
+                            Grid.Row="1"
+                            MaxHeight="60"
+                            VerticalScrollBarVisibility="Auto">
+                        <TextBlock Text="{Binding Description}" 
+                           Grid.Row="1" 
+                           Grid.ColumnSpan="2"
+                           TextWrapping="Wrap"/>
+                        </ScrollViewer>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+
+        <WrapPanel Grid.Column="1" Grid.Row="0" 
+        VerticalAlignment="Center"
+        HorizontalAlignment="Right">
+            <Button Width="30"
+                    Height="30"
+                    Command="{x:Static local:CustomCommands.SaveTask}">
+                <Image Source="/Assets/icon/save.png"/>
+            </Button>
+            
+            <Button MaxWidth="30" MaxHeight="30" 
+            Command="{x:Static local:CustomCommands.AddNewTask}">
+            <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/icon/add.png" Width="16"/>
+                </StackPanel>
+            <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock Text="При добавлении дела появится в списке слева, 
+                                   и его придется выполнить"/>
+                    </ToolTip>
+                </Button.ToolTip>
+        </Button>
+            
+        </WrapPanel>
+        
+
+
+
+            <ProgressBar Name="progressBar"
+                         Height="20"
+                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+            <TextBlock Name="progressText"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+
+
+
+
+    </Grid>
+</Window>
